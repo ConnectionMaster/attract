@@ -69,7 +69,7 @@ jobs:
     - name: Build on MacOS
       if: runner.os == 'macOS'
       env:
-	PKG_CONFIG_PATH: $PKG_CONFIG_PATH:/opt/homebrew/opt/libarchive/lib/pkgconfig:/opt/homebrew/opt/openal-soft/lib/pkgconfig:/opt/homebrew/opt/sfml@2/lib/pkgconfig
+#	PKG_CONFIG_PATH: $PKG_CONFIG_PATH:/opt/homebrew/opt/libarchive/lib/pkgconfig:/opt/homebrew/opt/openal-soft/lib/pkgconfig:/opt/homebrew/opt/sfml@2/lib/pkgconfig
         CC: ${{ matrix.config.cc }}
         CXX: ${{ matrix.config.cxx }}
       shell: bash

@@ -41,7 +41,7 @@ class UserConfig </ help="Plugin for blanking the screen and/or setting custom r
 	</ label="Command",
 		help="Command line to set a custom refresh rate (%RATE% gets replaced with the actual rate value)",
 		order=8 />
-	command="wlr-randr --output HDMI-A-1 --custom-mode 1280x1024@";
+	command="wlr-randr --output HDMI-A-1 --custom-mode 1280x1024@%RATE%";
 
 	</ label="Out of range strategy",
 			help="Set what to do when out of range.",
