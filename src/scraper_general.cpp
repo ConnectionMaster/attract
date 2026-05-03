@@ -305,6 +305,23 @@ void apply_import_extras( FeImporterContext &c, bool skip_xml )
 				mamep.parse_file( path );
 			}
 		}
+		else if ( tail_compare( path, ".ini" ) )
+		{
+			bool found=false;
+			for ( int i=0; i < FeRomInfo::LAST_INDEX; i++ )
+			{
+				if ( base_compare( path, FeRomInfo::indexStrings[i] ) )
+				{
+					ini_import( path, c.romlist, (FeRomInfo::Index)i, "" );
+					found = true;
+					break;
+				}
+			}
+
+			if ( !found )
+				FeLog() << " * Unsupported import_extras file: " << path << std::endl;
+
+		}
 		else
 			FeLog() << " * Unsupported import_extras file: " << path << std::endl;
 	}
