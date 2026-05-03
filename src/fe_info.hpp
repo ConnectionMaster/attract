@@ -61,6 +61,9 @@ public:
 		Language,
 		Region,
 		Rating,
+		DisplayWidth,
+		DisplayHeight,
+		DisplayRefresh,
 		Favourite,		// everything from Favourite on is not loaded from romlist
 		Tags,
 		PlayedCount,

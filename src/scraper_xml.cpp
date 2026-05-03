@@ -226,6 +226,12 @@ void FeListXMLParser::start_element(
 					(*m_itr).set_info( FeRomInfo::Rotation, attribute[i+1] );
 				else if ( strcmp( attribute[i], "type" ) == 0 )
 					(*m_itr).set_info( FeRomInfo::DisplayType, attribute[i+1] );
+				else if ( strcmp( attribute[i], "width" ) == 0 )
+					(*m_itr).set_info( FeRomInfo::DisplayWidth, attribute[i+1] );
+				else if ( strcmp( attribute[i], "height" ) == 0 )
+					(*m_itr).set_info( FeRomInfo::DisplayHeight, attribute[i+1] );
+				else if ( strcmp( attribute[i], "refresh" ) == 0 )
+					(*m_itr).set_info( FeRomInfo::DisplayRefresh, attribute[i+1] );
 			}
 			m_displays++;
 		}

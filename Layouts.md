@@ -201,6 +201,9 @@ Manufacturer's name.  There are more examples below.
       - `[Status]` - the emulation status for the selected game
       - `[DisplayCount]` - the number of displays for the selected game
       - `[DisplayType]` - the display type for the selected game
+      - `[DisplayWidth]` - the display width for the selected game
+      - `[DisplayHeight]` - the display height for the selected game
+      - `[DisplayRefresh]` - the display refresh rate for the selected game
       - `[AltRomname]` - the alternative Romname for the selected game
       - `[AltTitle]` - the alternative title for the selected game
       - `[PlayedTime]` - the amount of time the selected game has been
@@ -702,6 +705,9 @@ Parameters:
       - `Info.Status`
       - `Info.DisplayCount`
       - `Info.DisplayType`
+      - `Info.DisplayWidth`
+      - `Info.DisplayHeight`
+      - `Info.DisplayRefresh`
       - `Info.AltRomname`
       - `Info.AltTitle`
       - `Info.Extra`
@@ -1519,6 +1525,9 @@ Properties:
       - `Info.Status`
       - `Info.DisplayCount`
       - `Info.DisplayType`
+      - `Info.DisplayWidth`
+      - `Info.DisplayHeight`
+      - `Info.DisplayRefresh`
       - `Info.AltRomname`
       - `Info.AltTitle`
       - `Info.Extra`
