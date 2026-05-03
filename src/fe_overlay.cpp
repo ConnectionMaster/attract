@@ -556,7 +556,7 @@ int FeOverlay::languages_dialog()
 int FeOverlay::tags_dialog()
 {
 	std::vector< std::pair<std::string, bool> > tags_list;
-	m_feSettings.get_current_tags_list( tags_list );
+	m_feSettings.get_tags_list( tags_list );
 
 	std::vector<std::string> list;
 
@@ -596,20 +596,17 @@ int FeOverlay::tags_dialog()
 
 		if ( !name.empty() )
 		{
-			if ( m_feSettings.set_current_tag( name, true ) )
-			{
+			if ( m_feSettings.set_tag( name, true ) )
 				m_fePresent.update_to_new_list( 0, true ); // changing tag status altered our current list
-				m_fePresent.on_transition( ChangedTag, FeRomInfo::Tags );
-			}
+			m_fePresent.on_transition( ChangedTag, FeRomInfo::Tags );
 		}
 	}
 	else if (( sel >=0 ) && ( sel < (int)tags_list.size() ))
 	{
-		if ( m_feSettings.set_current_tag( tags_list[sel].first, !(tags_list[sel].second) ) )
-		{
+		if ( m_feSettings.set_tag( tags_list[sel].first, !(tags_list[sel].second) ) )
 			m_fePresent.update_to_new_list( 0, true ); // changing tag status altered our current list
-			m_fePresent.on_transition( ChangedTag, FeRomInfo::Tags );
-		}
+
+		m_fePresent.on_transition( ChangedTag, FeRomInfo::Tags );
 	}
 
 	return sel;

@@ -38,6 +38,8 @@ Contents
       * [`fe.path_test()`](#path_test)
       * [`fe.get_config()`](#get_config)
       * [`fe.get_text()`](#get_text)
+      * [`fe.get_tag()`](#get_tag)
+      * [`fe.set_tag()`](#set_tag)
    * [Objects and Variables](#objects)
       * [`fe.ambient_sound`](#ambient_sound)
       * [`fe.layout`](#layout)
@@ -1153,6 +1155,61 @@ Parameters:
 Return Value:
 
    * A string containing the translated text.
+
+&nbsp;
+<a name="get_tag" />
+
+#### `fe.get_tag()` ####
+
+    fe.get_tag( tag, index_offset, filter_offset )
+
+Check if a tag is set for the selected game.
+
+For example, "fe.get_tag("no_filler") will return 'true' if the
+currently selected game has been tagged as "no_filler".
+
+
+Parameters:
+
+   * tag - the tag to check for.
+   * index_offset - the offset (from the current selection) of the game to
+     retrieve the tag for.  i.e. -1=previous game, 0=current game, 1=next
+     game...  and so on.  Default value is 0.
+   * filter_offset - the offset (from the current filter) of the filter
+     containing the selection to retrieve info on.  i.e. -1=previous filter,
+     0=current filter.  Default value is 0.
+
+Return Value:
+
+   * 'true' if tag is set for selection, 'false' otherwise.
+
+&nbsp;
+<a name="set_tag" />
+
+#### `fe.set_tag()` ####
+
+    fe.set_tag( tag, value, index_offset, filter_offset )
+
+Add or remove a specified tag for the selected game.
+
+For example, "fe.set_tag("no_filler", true)" will add the "no_filler" tag
+to the currently selected game.
+
+
+Parameters:
+
+   * tag - the tag to set.
+   * value - 'true' to set the tag, 'false' to remove it.
+   * index_offset - the offset (from the current selection) of the game to
+     set the tag for.  i.e. -1=previous game, 0=current game, 1=next game...
+     and so on.  Default value is 0.
+   * filter_offset - the offset (from the current filter) of the filter
+     containing the selection to retrieve info on.  i.e. -1=previous filter,
+     0=current filter.  Default value is 0.
+
+Return Value:
+
+   * None.
 
 &nbsp;
 <a name="objects" />

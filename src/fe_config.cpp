@@ -704,8 +704,8 @@ bool FeEmulatorGenMenu::on_option_select(
 		{
 			FeDisplayInfo *new_disp = ctx.fe_settings.create_display( res );
 			new_disp->set_info( FeDisplayInfo::Romlist, res );
-			ctx.save_req = true;
 		}
+		ctx.save_req = true;
 	}
 
 	return true;

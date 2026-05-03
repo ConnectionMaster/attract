@@ -978,6 +978,12 @@ bool FeVM::on_new_layout()
 	fe.Overload<void (*)(int, bool)>(_SC("set_display"), &FeVM::cb_set_display);
 	fe.Overload<void (*)(int)>(_SC("set_display"), &FeVM::cb_set_display);
 	fe.Overload<const char *(*)(const char *)>(_SC("get_text"), &FeVM::cb_get_text);
+	fe.Overload<bool (*)(const char *)>(_SC("get_tag"), &FeVM::cb_get_tag);
+	fe.Overload<bool (*)(const char *, int)>(_SC("get_tag"), &FeVM::cb_get_tag);
+	fe.Overload<bool (*)(const char *, int, int)>(_SC("get_tag"), &FeVM::cb_get_tag);
+	fe.Overload<void (*)(const char *, bool)>(_SC("set_tag"), &FeVM::cb_set_tag);
+	fe.Overload<void (*)(const char *, bool, int)>(_SC("set_tag"), &FeVM::cb_set_tag);
+	fe.Overload<void (*)(const char *, bool, int, int)>(_SC("set_tag"), &FeVM::cb_set_tag);
 
 	//
 	// Define variables that get exposed to Squirrel
@@ -2634,6 +2640,56 @@ const char *FeVM::cb_get_text( const char *t )
 		fes->get_resource( t, retval );
 
 	return retval.c_str();
+}
+
+bool FeVM::cb_get_tag( const char *t, int offset, int filter_offset )
+{
+	HSQUIRRELVM vm = Sqrat::DefaultVM::Get();
+	FeVM *fev = (FeVM *)sq_getforeignptr( vm );
+	FeSettings *fes = fev->m_feSettings;
+
+	if ( t )
+		return fes->get_tag( t, filter_offset, offset );
+
+	return false;
+}
+
+bool FeVM::cb_get_tag( const char *t, int offset )
+{
+	return cb_get_tag( t, offset, 0 );
+}
+
+bool FeVM::cb_get_tag( const char *t )
+{
+	return cb_get_tag( t, 0, 0 );
+}
+
+void FeVM::cb_set_tag( const char *t, bool val, int offset, int filter_offset )
+{
+	HSQUIRRELVM vm = Sqrat::DefaultVM::Get();
+	FeVM *fev = (FeVM *)sq_getforeignptr( vm );
+	FeSettings *fes = fev->m_feSettings;
+
+	if ( t )
+	{
+		bool old_val = fes->get_tag( t, filter_offset, offset );
+
+		if ( fes->set_tag( t, val, filter_offset, offset ) )
+			fev->update_to_new_list( 0, true ); // Changing tag status altered our current list
+							    //
+		if ( val != old_val )
+			fev->on_transition( ChangedTag, FeRomInfo::Tags );
+	}
+}
+
+void FeVM::cb_set_tag( const char *t, bool val, int offset )
+{
+	cb_set_tag( t, val, offset, 0 );
+}
+
+void FeVM::cb_set_tag( const char *t, bool val )
+{
+	cb_set_tag( t, val, 0, 0 );
 }
 
 void FeVM::init_with_default_layout()

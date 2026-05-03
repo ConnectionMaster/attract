@@ -2038,13 +2038,13 @@ int FeSettings::get_next_letter_offset( int step )
 	return retval;
 }
 
-void FeSettings::get_current_tags_list(
-	std::vector< std::pair<std::string, bool> > &tags_list )
+void FeSettings::get_tags_list(
+	std::vector< std::pair<std::string, bool> > &tags_list, int filter_offset, int rom_offset )
 {
-	int filter_index = get_current_filter_index();
+	int filter_index = get_filter_index_from_offset( filter_offset );
 
 	FeRomInfo *r = get_rom_absolute( filter_index,
-			get_rom_index( filter_index, 0 ) );
+			get_rom_index( filter_index, rom_offset ) );
 
 	if ( !r )
 		return;
@@ -2052,16 +2052,26 @@ void FeSettings::get_current_tags_list(
 	m_rl.get_tags_list( *r, tags_list );
 }
 
-bool FeSettings::set_current_tag(
-		const std::string &tag, bool flag )
+bool FeSettings::get_tag(
+	const std::string &tag, int filter_offset, int offset )
+{
+	std::vector< std::pair<std::string, bool> > tags_list;
+	get_tags_list( tags_list, filter_offset, offset );
+
+	return ( std::find( tags_list.begin(), tags_list.end(),
+		std::pair<std::string, bool>( tag, true ) ) != tags_list.end() );
+}
+
+bool FeSettings::set_tag(
+		const std::string &tag, bool flag, int filter_offset, int rom_offset )
 {
 	if ( m_current_display < 0 )
 		return false;
 
-	int filter_index = get_current_filter_index();
+	int filter_index = get_filter_index_from_offset( filter_offset );
 
 	FeRomInfo *r = get_rom_absolute( filter_index,
-			get_rom_index( filter_index, 0 ) );
+			get_rom_index( filter_index, rom_offset ) );
 
 	if ( !r )
 		return false;

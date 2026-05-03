@@ -242,6 +242,12 @@ public:
 	static void cb_set_display( int, bool );
 	static void cb_set_display( int );
 	static const char *cb_get_text( const char * );
+	static bool cb_get_tag( const char * );
+	static bool cb_get_tag( const char *, int );
+	static bool cb_get_tag( const char *, int, int );
+	static void cb_set_tag( const char *, bool );
+	static void cb_set_tag( const char *, bool, int );
+	static void cb_set_tag( const char *, bool, int, int );
 };
 
 #endif

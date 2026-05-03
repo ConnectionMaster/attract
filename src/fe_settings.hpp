@@ -503,12 +503,13 @@ public:
 
 	int get_next_letter_offset( int step );
 
-	void get_current_tags_list(
-		std::vector< std::pair<std::string, bool> > &tags_list );
+	void get_tags_list(
+		std::vector< std::pair<std::string, bool> > &tags_list, int filter_offset=0, int rom_offset=0 );
+
+	bool get_tag( const std::string &tag, int filter_offset=0, int rom_offset=0 );
 
 	// returns true if the current list changed as a result of setting the tag
-	bool set_current_tag(
-			const std::string &tag, bool flag );
+	bool set_tag( const std::string &tag, bool flag, int filter_offset=0, int rom_offset=0 );
 	//
 	// This function implements command-line romlist generation/imports
 	// If output_name is empty, then a non-existing filename is chosen for
